@@ -74,43 +74,39 @@ Use this exact structure:
 ## ✅ Needs Action
 
 ### Features
-- [ ] **Feature {ID} — {Title}**
-    [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
-    > **Action:** {one sentence describing what user needs to do}
+- [ ] **Feature {ID} — {Title}** [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
+> **Action:** {one sentence describing what user needs to do}
 
-    | Who | When | Comment |
-    |-----|------|---------|
-    | {name} | {May 22 3:42 PM} | {snippet} |
+| Who | When | Comment |
+|-----|------|---------|
+| {name} | {May 22 3:42 PM} | {snippet} |
 
 ### Product Backlog Items
-- [ ] **PBI {ID} — {Title}**
-    [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
-    > **Action:** {one sentence}
+- [ ] **PBI {ID} — {Title}** [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
+> **Action:** {one sentence}
 
-    | Who | When | Comment |
-    |-----|------|---------|
-    | {name} | {date} | {snippet} |
+| Who | When | Comment |
+|-----|------|---------|
+| {name} | {date} | {snippet} |
 
 ### Bugs
-- [ ] **Bug {ID} — {Title}**
-    [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
-    > **Action:** {one sentence}
+- [ ] **Bug {ID} — {Title}** [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
+> **Action:** {one sentence}
 
-    | Who | When | Comment |
-    |-----|------|---------|
-    | {name} | {date} | {snippet} |
+| Who | When | Comment |
+|-----|------|---------|
+| {name} | {date} | {snippet} |
 
 ---
 
 ## 👀 No Action Needed
 
 ### Features
-- [ ] **Feature {ID} — {Title}**
-    [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
+- [ ] **Feature {ID} — {Title}** [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
 
-    | Who | When | Comment |
-    |-----|------|---------|
-    | {name} | {date} | {snippet} |
+| Who | When | Comment |
+|-----|------|---------|
+| {name} | {date} | {snippet} |
 
 ### Product Backlog Items
 (same structure, no Action line)
@@ -132,5 +128,5 @@ Rules for the report:
 - Date format: MMM DD h:mm AM/PM (e.g. May 22 3:42 PM)
 - If a ticket's AzDO fetch failed, add a note in italics under the title: *⚠️ Could not fetch ticket details — review manually*. These should be in the "Needs Action" section of the report.
 
-In your Run Summary, summarize by groups only showing number of tickets in Needs Action Features/PBIs/Bugs and No Action Needed Features/PBIs/Bugs. So you should give 6 total summary lines. 
+In your Run Summary, give me two summaries. First of all, give me a total number of tickets found, how many are in Needs Action, how many are in No Action Needed, and how many you could not get ticket details for (if any). Then summarize the tickets by groups only showing number of tickets in Needs Action Features/PBIs/Bugs and No Action Needed Features/PBIs/Bugs. You do not need to provide ticket IDs only the total number in each group. So you should give 7 total summary lines.
 
