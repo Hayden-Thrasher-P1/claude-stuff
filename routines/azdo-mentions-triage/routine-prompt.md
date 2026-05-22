@@ -1,9 +1,15 @@
-You are an automated assistant for user (user@email.com)
+Run this routine with --dangerously-skip-permissions enabled.
+
+You are an automated assistant for user (user@email.com).
 
 Your job is to run the AzDO Mentions Triage Report. Do the following steps in order, completing each fully before moving to the next.
 
 ## Step 1 — Fetch emails
-Use the Microsoft 365 Outlook connector to search the "AzDO Mentions" folder. Fetch all emails, paginating with offset if there are more than 25. Each email subject follows one of these formats:
+Use the Microsoft 365 Outlook connector to search the "AzDO Mentions" folder. Fetch all emails, paginating with offset if there are more than 25. 
+
+IMPORTANT: Record the email IDs of every email you fetch at the start. These are the only emails you will archive at the end — do not archive any emails that arrive in the folder after this point.
+
+Each email subject follows one of these formats:
 - "Bug 12345 - Title"
 - "Product Backlog Item 12345 - Title"
 - "Feature 12345 - Title"
@@ -32,7 +38,7 @@ Header — Content-Type: application/json
 From the work item extract: title, description, state, assigned to.
 From the comments extract: all comment authors, dates, and full text.
 
-If either call fails for a ticket, note it and continue — do not stop the whole run.
+If either call fails for a ticket, note it and continue — do not stop the whole run. Track which tickets failed so you can flag them in the report.
 
 ## Step 4 — Triage each ticket
 Read the full comment thread and description. Decide: ACTION REQUIRED or NO ACTION NEEDED.
@@ -70,43 +76,43 @@ Use this exact structure:
 ## ✅ Needs Action
 
 ### Features
-#### Feature {ID} — {Title}
-[Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
-> **Action:** {one sentence describing what user needs to do}
+- [ ] **Feature {ID} — {Title}**
+    [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
+    > **Action:** {one sentence describing what user needs to do}
 
-| Who | When | Comment |
-|-----|------|---------|
-| {name} | {May 22 3:42 PM} | {snippet} |
+    | Who | When | Comment |
+    |-----|------|---------|
+    | {name} | {May 22 3:42 PM} | {snippet} |
 
 ### Product Backlog Items
-#### PBI {ID} — {Title}
-[Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
-> **Action:** {one sentence}
+- [ ] **PBI {ID} — {Title}**
+    [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
+    > **Action:** {one sentence}
 
-| Who | When | Comment |
-|-----|------|---------|
-| {name} | {date} | {snippet} |
+    | Who | When | Comment |
+    |-----|------|---------|
+    | {name} | {date} | {snippet} |
 
 ### Bugs
-#### Bug {ID} — {Title}
-[Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
-> **Action:** {one sentence}
+- [ ]  **Bug {ID} — {Title}**
+    [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
+    > **Action:** {one sentence}
 
-| Who | When | Comment |
-|-----|------|---------|
-| {name} | {date} | {snippet} |
+    | Who | When | Comment |
+    |-----|------|---------|
+    | {name} | {date} | {snippet} |
 
 ---
 
 ## 👀 No Action Needed
 
 ### Features
-#### Feature {ID} — {Title}
-[Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
+- [ ] **Feature {ID} — {Title}**
+    [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
 
-| Who | When | Comment |
-|-----|------|---------|
-| {name} | {date} | {snippet} |
+    | Who | When | Comment |
+    |-----|------|---------|
+    | {name} | {date} | {snippet} |
 
 ### Product Backlog Items
 (same structure, no Action line)
@@ -119,8 +125,23 @@ Use this exact structure:
 
 ---
 
-Only render a section header (Features, Product Backlog Items, Bugs) if there is at least one ticket of that type in that tab. If there are no actionable tickets at all, replace the Needs Action section body with: "No tickets require action right now." If the folder is empty, write: "No mentions found in AzDO Mentions folder."
+Rules for the report:
+- Only render a section header (Features, Product Backlog Items, Bugs) if there is at least one ticket of that type in that section
+- If there are no actionable tickets, replace the Needs Action section body with: "No tickets require action right now."
+- If the folder was empty, write: "No mentions found in AzDO Mentions folder." and skip Steps 6 and 7 entirely
+- Order within each section: Features first, then Product Backlog Items, then Bugs
+- Order mentions within each ticket: oldest to newest
+- Date format: MMM DD h:mm AM/PM (e.g. May 22 3:42 PM)
+- If a ticket's AzDO fetch failed, add a note in italics under the title: *⚠️ Could not fetch ticket details — review manually*
 
-Order within each section: Features first, then Product Backlog Items, then Bugs.
-Order mentions within each ticket: oldest to newest.
-Date format for all timestamps: MMM DD h:mm AM/PM (e.g. May 22 3:42 PM).
+## Step 6 — Verify the report was written successfully
+Confirm the file exists at /Users/hayden.thrasher/Dropbox/Work Notes/AzDO-Report.md and is not empty. If the file is missing or empty, do NOT proceed to Step 7. Stop and report the error.
+
+## Step 7 — Archive emails
+Only proceed here if Step 6 confirmed the report was written successfully.
+
+For each email ID you recorded in Step 1, move that email to the Archive folder using the Microsoft 365 Outlook connector. Archive them one at a time. If any individual archive operation fails, log the failure but continue archiving the rest — do not stop.
+
+After archiving, report back:
+- How many emails were successfully archived
+- How many failed to archive (if any), and which ticket they were from

@@ -34,3 +34,11 @@ This routine requires:
 - A Microsoft365 account, and setting up the M365 connector in Claude Desktop
 - Azure DevOps Personal Access Token
 - A local Obsidian Vault
+
+## Additional Note
+
+This routine will need to be babysat in order to run without having to manually give Claude permissions several times. 
+
+In order to get around that, you can set your Claude Code settings to "Allow bypass permissions mode".
+
+**Only do this if you are aware of the consequences and this is your local machine that only you have access to**
