@@ -24,7 +24,7 @@ The included `routine-prompt.md` file has been scrubbed of identifying informati
 | `user@email.com`  | The email address of the Outlook account this is being run for | 
 | `{organization}` | The name of the Azure DevOps organization you are connecting to |
 | `{project}` | The name of the Azure DevOps project you are connecting to |
-|  `YOUR_BASE64_PAT` | Your Azure DevOps Personal Access token, converted to Base64. Can be done by opening a browser and running `btoa(':YOURPAT')` in the console. 
+|  `YOUR_BASE64_PAT` | Your Azure DevOps Personal Access token, converted to Base64. Can be done by opening a browser and running `btoa(':YOURPAT')` in a browser console. 
 
 ## Requirements 
 
