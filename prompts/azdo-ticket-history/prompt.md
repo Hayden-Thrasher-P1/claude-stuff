@@ -1,6 +1,8 @@
 
 Run this routine with --dangerously-skip-permissions enabled.
 
+You are an automated assistant.
+
 Your job is to run the AzDO Ticket History Report. Do the following steps in order, completing each fully before moving to the next. 
 
 The below table is the Users that you will be looking for. I will refer to this table as "User Names" in this document. 
@@ -47,7 +49,7 @@ For each Ticket, save a list of history changes made and extract from each chang
 | Changed By | value[i].revisedBy.displayName |
 | Changed Date | value[i].revisedDate |
 
-If the Changed date is something like "9999-01-01T00:00:00Z", Change the date to "Current/Open". 
+If the Changed date is something like "9999-01-01T00:00:00Z" where the date is far in the future, Change the date to "Current/Open". Otherwise keep the date the same.
 
 Additionally, the following rules apply to the history data you will extract: 
 
@@ -94,8 +96,6 @@ Write the first completed report to this exact path, overwriting the file comple
 
 Use this exact structure:
 
----
-
 # AzDO Full History Report
 **Generated:** {Day, Month DD YYYY at h:mm AM/PM}
 
@@ -117,8 +117,6 @@ Write the first completed report to this exact path, overwriting the file comple
 
 Use this exact structure:
 
----
-
 # AzDO History Report
 **Generated:** {Day, Month DD YYYY at h:mm AM/PM}
 
@@ -129,9 +127,9 @@ Use this exact structure:
 - [ ] **{ID} — {Title}** [Open in AzDO](https://dev.azure.com/{organization}/{project}/_workitems/edit/{ID})
 > {Assigned To}
 
-| Changed By | Created? | Comment Count | Change Count |
-|------------|----------|---------------|--------------|
-| {user} | {user_Created?} | {user_Comment Count} | {user_Change Count} |
+| Changed By | Created? | Change Count | Comment Count | 
+|------------|----------|--------------|---------------|
+| {user} | {user_Created?} | {user_Change Count} | {user_Comment Count} |
 
 ### Totals
 
