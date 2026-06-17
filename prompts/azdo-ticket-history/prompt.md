@@ -61,6 +61,7 @@ Additionally, the following rules apply to the history data you will extract:
 
 | Ignore |
 |--------|
+| System.Rev |
 | System.Watermark |
 | System.AuthorizedDate |
 | System.RevisedDate |
