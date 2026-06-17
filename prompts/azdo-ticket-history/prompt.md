@@ -55,9 +55,21 @@ Additionally, the following rules apply to the history data you will extract:
 
 - There should be an extracted readable property name "Ticket Created". If the value[i].id of the history is one and/or the valude[i].rev of the history is one, extract "Ticket Created" as "true". Otherwise, "Ticket Created" for that property on the history should be "false". 
 
-- There should be an extracted readable property name "Fields Changed". If "Ticket Created" is "false" for a history AND there is an object on the history item called "fields", extract "Fields Changed" with the property value "true". Otherwise, "Fields Changed" for that property on the history should be "false". The JSON property name will be like value[i].fields
-
 - There should be an extracted readable property name "Comment Made". If "Ticket Created" is "false" for a history AND if the "fields" object exists, AND there is another object in the fields named "System.CommentCount", extract "Comment Made" with the property value "true". Otherwise, "Comment Made" should be "false". The JSON property name will be like value[i].fields.System.CommentCount
+
+- There should be an extracted readable property name "Fields Changed". If "Ticket Created" is "false" for a history AND there is a fields object on the history item AND that fields object contains at least one key that is NOT in the below table with the header "Ignore", extract "Fields Changed" as "true". Otherwise, "Fields Changed" is "false". The JSON property name will be like value[i].fields
+
+| Ignore |
+|--------|
+| System.Watermark |
+| System.AuthorizedDate |
+| System.RevisedDate |
+| System.ChangedDate |
+| System.ChangedBy |
+| System.AuthorizedAs |
+| System.PersonId |
+| Microsoft.VSTS.Common.BacklogPriority |
+| Any field beginning with WEF_ |
 
 If any call fails for a ticket, note it and continue - do not stop the whole run. Track which ones fail. 
 
@@ -103,9 +115,9 @@ Use this exact structure:
 
 ### All History
 
-| Changed By | Changed Date | Ticket Created | Fields Changed | Comment Made |
-|------------|--------------|----------------|----------------|--------------|
-| {changed by} | {date} | true/false | true/false | true/false |
+| Changed By | Changed Date | Ticket Created | Fields Changed | Comment Made | Ticket Id |
+|------------|--------------|----------------|----------------|--------------|-----------|
+| {changed by} | {date} | true/false | true/false | true/false | {ticket ID}
 
 Other Rules for the report:
 - Date format: MMM DD h:mm AM/PM (e.g. May 22 3:42 PM)
