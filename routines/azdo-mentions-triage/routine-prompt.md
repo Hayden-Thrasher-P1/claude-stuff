@@ -69,8 +69,6 @@ Write the completed report to this exact path, overwriting the file completely e
 
 Use this exact structure:
 
----
-
 # AzDO Mentions Report
 **Generated:** {Day, Month DD YYYY at h:mm AM/PM}
 **{X} tickets total · {X} need action · {X} no action needed**
